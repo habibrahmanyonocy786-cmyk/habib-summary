@@ -1,9 +1,10 @@
-﻿# Habib-summary - Project Structure
+# Habib-summary - Project Structure
 
-> Last updated: 12 JUNE 2026 (2026-06-12 08:35)
+> Last updated: 12 JUNE 2026 (2026-06-12 08:36)
 
 ```
 habib-summary/
++-- _config.yml (0.2 KB)
 +-- data.json (12.7 KB)
 +-- index.html (3.4 KB)
 +-- PLAN.md (10.8 KB)
@@ -12,7 +13,6 @@ habib-summary/
 +-- SUMMARY.md (2 KB)
 +-- update-project-files.ps1 (6.1 KB)
 +-- update-structure.ps1 (1 KB)
-+-- _config.yml (0.2 KB)
         +-- deploy.yml (1.1 KB)
     +-- login.html (2.6 KB)
     +-- manage.html (2.1 KB)
@@ -36,6 +36,7 @@ habib-summary/
 
 | File | Size (KB) | Description |
 |------|-----------|-------------|
+| _config.yml | 0.2 | GitHub Pages config |
 | data.json | 12.7 | - |
 | index.html | 3.4 | Main SPA app |
 | PLAN.md | 10.8 | Database & backend plan |
@@ -44,7 +45,6 @@ habib-summary/
 | SUMMARY.md | 2 | Project summary |
 | update-project-files.ps1 | 6.1 | Combined structure + summary updater |
 | update-structure.ps1 | 1 | Legacy structure script |
-| _config.yml | 0.2 | GitHub Pages config |
 | .github\workflows\deploy.yml | 1.1 | - |
 | admin\login.html | 2.6 | - |
 | admin\manage.html | 2.1 | - |
