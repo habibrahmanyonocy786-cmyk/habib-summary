@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "source": "Google News RSS - Business Section",
+    "updated": "2026-06-12",
+    "total_articles": 20,
+    "language": "en",
+    "description": "Economic articles fetched from Google News RSS feed. Database for Habib-summary project."
+  },
+  "articles": [
+    {
+      "id": "eco-001",
+      "title": "SpaceX IPO: Company debuts on stock exchange, setting Elon Musk on course to $1tn",
+      "source": "BBC",
+      "url": "https://www.bbc.com",
+      "published_at": "2026-06-12T15:21:59Z",
+      "summary": "SpaceX made its historic public debut on the stock market, with the IPO potentially setting Elon Musk on course to become the world's first trillionaire. The listing was one of the most anticipated in market history.",
+      "category": "stock_market",
+      "tags": ["IPO", "SpaceX", "Elon Musk", "stock market", "trillionaire"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-002",
+      "title": "U.S. stock futures rise on signs of a potential U.S.-Iran peace deal; traders await SpaceX IPO",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com",
+      "published_at": "2026-06-12T15:21:00Z",
+      "summary": "U.S. stock futures rose as signs emerged of a potential peace deal between the U.S. and Iran. Traders were also awaiting the historic SpaceX IPO. The Dow was up significantly on the optimism.",
+      "category": "stock_market",
+      "tags": ["stock futures", "US-Iran", "peace deal", "SpaceX", "Dow"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-003",
+      "title": "Oil falls to near two-month lows as Trump calls off threatened strikes on Iran",
+      "source": "Reuters",
+      "url": "https://www.reuters.com",
+      "published_at": "2026-06-12T01:04:00Z",
+      "summary": "Oil prices fell to near two-month lows after President Trump called off threatened strikes on Iran. The development eased supply disruption fears that had driven prices higher in previous weeks.",
+      "category": "commodities",
+      "tags": ["oil", "crude", "Iran", "geopolitics", "supply"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-004",
+      "title": "US producer prices spike in May as soaring energy prices fuel largest yearly jump since 2022",
+      "source": "AP News",
+      "url": "https://apnews.com",
+      "published_at": "2026-06-11T16:51:00Z",
+      "summary": "U.S. producer prices surged in May, posting the largest annual increase since 2022, driven by soaring energy costs. The PPI data raised concerns about persistent inflationary pressures in the economy.",
+      "category": "inflation",
+      "tags": ["PPI", "producer prices", "inflation", "energy", "wholesale"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-005",
+      "title": "Thanks to Stalled Economic Growth, a 'Lost Decade' Looms",
+      "source": "Newser",
+      "url": "https://www.newser.com",
+      "published_at": "2026-06-11T17:30:00Z",
+      "summary": "Economic analysis suggests that stalled global growth could lead to a 'lost decade' for many economies. Persistent headwinds from inflation, geopolitical tensions, and structural challenges are weighing on expansion.",
+      "category": "global_economy",
+      "tags": ["economic growth", "lost decade", "global economy", "recession"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-006",
+      "title": "World Bank Says Two-Thirds of Economies Face Hit From Iran War",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com",
+      "published_at": "2026-06-11T17:00:00Z",
+      "summary": "The World Bank warned that two-thirds of global economies could face negative impacts from the Iran conflict. The bank cut its global growth forecast and warned of severe spillover effects.",
+      "category": "global_economy",
+      "tags": ["World Bank", "Iran", "growth forecast", "global economy", "war"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-007",
+      "title": "US-Iran war to pull global economy to post-COVID low: World Bank",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com",
+      "published_at": "2026-06-11T16:00:00Z",
+      "summary": "The World Bank projected that the US-Iran conflict could drag the global economy to its lowest growth since the COVID-19 pandemic. Energy price shocks and trade disruptions were cited as key factors.",
+      "category": "global_economy",
+      "tags": ["World Bank", "global economy", "COVID", "Iran", "growth"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-008",
+      "title": "World Bank cuts global growth outlook to 2.5%, warns of drop to 1.3% if war fallout spreads",
+      "source": "Reuters",
+      "url": "https://www.reuters.com",
+      "published_at": "2026-06-11T15:30:00Z",
+      "summary": "The World Bank cut its global growth outlook to 2.5%, warning it could fall to as low as 1.3% if the Iran war fallout spreads to financial markets. The revision reflects heightened geopolitical risk.",
+      "category": "global_economy",
+      "tags": ["World Bank", "growth outlook", "GDP", "Iran", "financial markets"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-009",
+      "title": "Rates Drop Sharply to One Week Lows",
+      "source": "Mortgage News Daily",
+      "url": "https://www.mortgagenewsdaily.com",
+      "published_at": "2026-06-11T20:15:11Z",
+      "summary": "Mortgage rates dropped sharply to one-week lows amid shifting expectations for Federal Reserve policy and geopolitical developments. The decline offered some relief to the housing market.",
+      "category": "interest_rates",
+      "tags": ["mortgage rates", "Federal Reserve", "housing", "interest rates"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-010",
+      "title": "Why AI token prices are about to plummet",
+      "source": "Business Insider",
+      "url": "https://www.businessinsider.com",
+      "published_at": "2026-06-12T09:01:10Z",
+      "summary": "Analysis suggests AI token prices are poised for a significant decline as tokenomics come under scrutiny. Concerns about overspending on 'low IQ' AI tasks and unsustainable token economics are driving the bearish outlook.",
+      "category": "technology",
+      "tags": ["AI", "tokenomics", "crypto", "technology spending", "AI tokens"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-011",
+      "title": "Apollo's Zito Says Too Much AI Spending Is for 'Low IQ' Tasks",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com",
+      "published_at": "2026-06-12T10:00:00Z",
+      "summary": "Apollo Global Management's Torsten Zito warned that a significant portion of AI spending is being directed toward 'low IQ' tasks, raising concerns about the sustainability and productivity of current AI investment levels.",
+      "category": "technology",
+      "tags": ["AI", "spending", "Apollo", "investment", "productivity"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-012",
+      "title": "Wholesale prices rose 1.1% in May, more than expected, on surge in energy",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com",
+      "published_at": "2026-06-11T16:00:00Z",
+      "summary": "U.S. wholesale prices rose 1.1% in May, exceeding economist expectations, driven by a surge in energy costs. The data signals that inflationary pressures remain elevated in the supply chain.",
+      "category": "inflation",
+      "tags": ["PPI", "wholesale", "inflation", "energy", "supply chain"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-013",
+      "title": "Can smartphones help explain the drop in birth rates?",
+      "source": "NPR",
+      "url": "https://www.npr.org",
+      "published_at": "2026-06-12T09:00:00Z",
+      "summary": "A new study suggests smartphone adoption may explain up to half of the decline in U.S. fertility rates. The research highlights the economic and social implications of technology on demographic trends.",
+      "category": "demographics",
+      "tags": ["birth rates", "smartphones", "fertility", "demographics", "technology"],
+      "sentiment": "neutral"
+    },
+    {
+      "id": "eco-014",
+      "title": "Seniors needed long-term care and rehab. Their private Medicare plans said no.",
+      "source": "The Washington Post",
+      "url": "https://www.washingtonpost.com",
+      "published_at": "2026-06-12T04:28:33Z",
+      "summary": "An investigation found that Medicare Advantage plans are denying seniors access to long-term care and rehabilitation services at high rates. The findings raise concerns about healthcare access for the elderly.",
+      "category": "healthcare",
+      "tags": ["Medicare", "healthcare", "seniors", "insurance", "long-term care"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-015",
+      "title": "Meet the SpaceX employees who are set to become multimillionaires thanks to its IPO",
+      "source": "Fortune",
+      "url": "https://fortune.com",
+      "published_at": "2026-06-11T14:24:00Z",
+      "summary": "SpaceX's historic IPO is set to create thousands of new multimillionaires among its employees, from executives to even welders. The wealth creation event is one of the largest in corporate history.",
+      "category": "stock_market",
+      "tags": ["SpaceX", "IPO", "wealth", "employees", "millionaires"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-016",
+      "title": "Stock market today: Dow up 500 points as SpaceX starts trading Friday",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com",
+      "published_at": "2026-06-12T14:00:00Z",
+      "summary": "The Dow Jones Industrial Average surged 500 points on Friday as SpaceX began trading on the stock exchange. The S&P 500 and Nasdaq also climbed amid optimism over US-Iran peace talks.",
+      "category": "stock_market",
+      "tags": ["Dow", "S&P 500", "Nasdaq", "SpaceX", "stock market"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-017",
+      "title": "Elon Musk could become the world's first trillionaire with SpaceX's IPO",
+      "source": "PBS",
+      "url": "https://www.pbs.org",
+      "published_at": "2026-06-12T13:00:00Z",
+      "summary": "With SpaceX's blockbuster IPO, Elon Musk is on track to become the world's first trillionaire. The valuation of SpaceX and his other ventures positions him for unprecedented wealth.",
+      "category": "stock_market",
+      "tags": ["Elon Musk", "trillionaire", "SpaceX", "wealth", "IPO"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-018",
+      "title": "US wholesale inflation rose sharply last month as Iran oil shock continues to drive up business costs",
+      "source": "CNN",
+      "url": "https://www.cnn.com",
+      "published_at": "2026-06-11T17:00:00Z",
+      "summary": "U.S. wholesale inflation accelerated sharply in May, driven by the ongoing Iran oil shock that continues to push up business costs across the economy. The data reinforces the Fed's cautious stance.",
+      "category": "inflation",
+      "tags": ["inflation", "wholesale", "Iran", "oil", "Federal Reserve"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-019",
+      "title": "What Happens If Tesla and SpaceX Merge?",
+      "source": "Morningstar",
+      "url": "https://www.morningstar.com",
+      "published_at": "2026-06-12T12:00:00Z",
+      "summary": "Speculation about a potential Tesla-SpaceX merger intensified after SpaceX president Gwynne Shotwell floated the idea on IPO day. Analysts are divided on the implications for shareholders and valuation.",
+      "category": "stock_market",
+      "tags": ["Tesla", "SpaceX", "merger", "Elon Musk", "valuation"],
+      "sentiment": "neutral"
+    },
+    {
+      "id": "eco-020",
+      "title": "SpaceX's I.P.O. Could Turn 4,400 Employees Into Millionaires",
+      "source": "The New York Times",
+      "url": "https://www.nytimes.com",
+      "published_at": "2026-06-11T15:00:00Z",
+      "summary": "The New York Times reported that SpaceX's IPO could transform approximately 4,400 employees into millionaires. The landmark listing represents one of the largest wealth-creation events for employees in history.",
+      "category": "stock_market",
+      "tags": ["SpaceX", "IPO", "employees", "millionaires", "wealth creation"],
+      "sentiment": "positive"
+    }
+  ],
+  "categories": [
+    {
+      "id": "stock_market",
+      "name": "Stock Market",
+      "count": 7
+    },
+    {
+      "id": "global_economy",
+      "name": "Global Economy",
+      "count": 4
+    },
+    {
+      "id": "inflation",
+      "name": "Inflation & Prices",
+      "count": 3
+    },
+    {
+      "id": "commodities",
+      "name": "Commodities",
+      "count": 1
+    },
+    {
+      "id": "interest_rates",
+      "name": "Interest Rates",
+      "count": 1
+    },
+    {
+      "id": "technology",
+      "name": "Technology & AI",
+      "count": 2
+    },
+    {
+      "id": "demographics",
+      "name": "Demographics",
+      "count": 1
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare",
+      "count": 1
+    }
+  ]
+}

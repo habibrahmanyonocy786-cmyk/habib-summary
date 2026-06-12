@@ -1,0 +1,43 @@
+/* Habib-summary — Custom Styles
+   ============================================================
+   استایل‌های سفارشی مکمل Tailwind CSS
+   ============================================================ */
+
+/* RTL enhancements */
+[dir="rtl"] .space-x-reverse {
+    --tw-space-x-reverse: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+    background: #2d5a8e;
+    border-radius: 3px;
+}
+
+/* Print styles */
+@media print {
+    header, nav, footer, .no-print {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+    }
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
