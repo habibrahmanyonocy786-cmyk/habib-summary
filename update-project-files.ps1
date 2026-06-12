@@ -6,7 +6,7 @@
 
 $r = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
 $now = Get-Date -Format "yyyy-MM-dd HH:mm"
-$persianDate = "12 JUNE 2026"
+$persianDate = (Get-Date -Format "dd MMMM yyyy")
 
 # -----------------------------------------------------------
 # 1. Generate STRUCTURE.md — file and folder structure

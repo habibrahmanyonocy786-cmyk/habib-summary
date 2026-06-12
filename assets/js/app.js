@@ -1,6 +1,13 @@
 // Habib-summary — Unified Application Controller
 // ============================================================
 
+window.$ = window.$ || (s => document.querySelector(s));
+window.$$ = window.$$ || (s => document.querySelectorAll(s));
+
+function fmtNum(n) {
+  try { return n.toLocaleString('fa-IR') } catch(e) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }
+}
+
 const Habib = {
   // ---- Data ----
   books: [
@@ -321,28 +328,62 @@ const Habib = {
   renderUpload() {
     this.els.upload.innerHTML = `
       <div class="bg-white rounded-xl border border-gray-200 p-5">
-        <div class="text-center py-8 border-2 border-dashed border-gray-300 rounded-xl" id="dropZone">
-          <div class="text-4xl mb-3">📄</div>
+        <div class="text-center py-8 border-2 border-dashed border-gray-300 rounded-xl transition-all duration-200" id="dropZone">
+          <div class="text-4xl mb-3" id="dropIcon">📄</div>
           <h3 class="font-bold text-gray-700 mb-1">آپلود فایل کتاب</h3>
-          <p class="text-gray-500 text-sm mb-4">PDF, DOCX, JPEG, PNG</p>
+          <p class="text-gray-500 text-sm mb-4">فایل را اینجا رها کنید یا کلیک کنید</p>
+          <p class="text-xs text-gray-400 mb-4">PDF, DOCX, JPEG, PNG — حداکثر ۵۰ مگابایت</p>
           <button class="px-5 py-2.5 rounded-lg bg-gray-800 text-white text-sm font-medium hover:bg-gray-700" onclick="document.getElementById('fileInput').click()">انتخاب فایل</button>
-          <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.jpg,.jpeg,.png" class="hidden" onchange="Habib.handleFile(event)">
+          <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.jpg,.jpeg,.png" class="hidden">
           <div id="fileInfo" class="hidden mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
             <div class="flex items-center gap-3"><span id="fileIcon" class="text-2xl">📕</span><div class="flex-1 min-w-0"><p id="fileName" class="font-medium text-gray-800 truncate text-sm"></p><p id="fileSize" class="text-xs text-gray-500"></p></div>
-            <button class="text-red-400 hover:text-red-600 text-sm" onclick="Habib.state.file=null;Habib.state.extractedText='';document.getElementById('fileInput').value='';document.getElementById('fileInfo').classList.add('hidden');document.getElementById('resultArea')?.classList.add('hidden');document.getElementById('processingArea')?.classList.add('hidden')">✕</button></div>
+            <button class="text-red-400 hover:text-red-600 text-sm" id="removeFileBtn">✕</button></div>
           </div>
         </div>
         <div id="processingArea" class="hidden mt-4"></div>
         <div id="resultArea" class="hidden mt-4"></div>
       </div>`;
+    this.initDropZone();
   },
 
-  handleFile(e) {
-    const file = e.target.files[0];
-    if (!file) return;
+  initDropZone() {
+    const zone = document.getElementById('dropZone');
+    const input = document.getElementById('fileInput');
+    document.querySelector('button[onclick*="fileInput.click()"]')?.addEventListener('click', () => input.click());
+
+    input.addEventListener('change', (e) => {
+      const f = e.target.files[0];
+      if (f) this.handleFileSelect(f);
+    });
+
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.style.borderColor = '#1e3a5f'; zone.style.background = '#eef4ff'; document.getElementById('dropIcon').textContent = '📥'; });
+    zone.addEventListener('dragleave', () => { zone.style.borderColor = '#d1d5db'; zone.style.background = 'transparent'; document.getElementById('dropIcon').textContent = '📄'; });
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.style.borderColor = '#d1d5db'; zone.style.background = 'transparent';
+      document.getElementById('dropIcon').textContent = '📄';
+      const f = e.dataTransfer.files[0];
+      if (f) this.handleFileSelect(f);
+    });
+
+    document.getElementById('removeFileBtn')?.addEventListener('click', () => this.resetUpload());
+  },
+
+  resetUpload() {
+    this.state.file = null;
+    this.state.extractedText = '';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('fileInfo').classList.add('hidden');
+    document.getElementById('resultArea')?.classList.add('hidden');
+    document.getElementById('processingArea')?.classList.add('hidden');
+    document.getElementById('dropIcon').textContent = '📄';
+  },
+
+  handleFileSelect(file) {
     const ext = file.name.split('.').pop().toLowerCase();
     const valid = ['pdf','docx','doc','jpg','jpeg','png'];
-    if (!valid.includes(ext) || file.size > 50*1024*1024) { alert('فرمت نامعتبر یا حجم بیش از ۵۰ مگابایت'); return; }
+    if (!valid.includes(ext)) { alert('فرمت پشتیبانی نمی‌شود'); return; }
+    if (file.size > 50*1024*1024) { alert('حجم فایل بیش از ۵۰ مگابایت'); return; }
     this.state.file = file;
     document.getElementById('fileIcon').textContent = ext==='pdf'?'📕':ext.startsWith('doc')?'📘':'🖼️';
     document.getElementById('fileName').textContent = file.name;
@@ -392,6 +433,13 @@ const Habib = {
     }
   },
 
+  copySummary(btn) {
+    navigator.clipboard.writeText(document.getElementById('summaryContent').textContent).then(() => {
+      btn.textContent = '✅ کپی شد';
+      setTimeout(() => { btn.innerHTML = 'کپی خلاصه'; }, 2000);
+    });
+  },
+
   showResult(original, summary) {
     const ra = document.getElementById('resultArea');
     const origWords = original.split(/\s+/).filter(w => w.length > 0).length;
@@ -402,8 +450,8 @@ const Habib = {
           <div class="text-4xl mb-2">📝</div>
           <h3 class="text-lg font-bold">خلاصه کتاب</h3>
           <div class="flex justify-center gap-4 mt-3 text-sm">
-            <div class="bg-white/10 rounded-lg px-3 py-2"><span class="block text-lg font-bold">${origWords.toLocaleString('fa')}</span><span class="text-white/60 text-xs">کلمه اصلی</span></div>
-            <div class="bg-white/10 rounded-lg px-3 py-2"><span class="block text-lg font-bold">${summary.words.toLocaleString('fa')}</span><span class="text-white/60 text-xs">کلمه خلاصه</span></div>
+            <div class="bg-white/10 rounded-lg px-3 py-2"><span class="block text-lg font-bold">${fmtNum(origWords)}</span><span class="text-white/60 text-xs">کلمه اصلی</span></div>
+            <div class="bg-white/10 rounded-lg px-3 py-2"><span class="block text-lg font-bold">${fmtNum(summary.words)}</span><span class="text-white/60 text-xs">کلمه خلاصه</span></div>
             <div class="bg-white/10 rounded-lg px-3 py-2"><span class="block text-lg font-bold">${(summary.ratio*100).toFixed(1)}%</span><span class="text-white/60 text-xs">نسبت</span></div>
           </div>
         </div>
@@ -412,7 +460,7 @@ const Habib = {
           <p class="text-gray-700 leading-8" id="summaryContent">${summary.text}</p>
         </div>
         <div class="flex gap-3">
-          <button class="flex-1 py-2.5 rounded-lg bg-gray-800 text-white text-sm font-medium hover:bg-gray-700" onclick="navigator.clipboard.writeText(document.getElementById('summaryContent').textContent).then(()=>{const btn=event.target;btn.textContent='✅ کپی شد';setTimeout(()=>btn.innerHTML='کپی خلاصه',2000)})">کپی خلاصه</button>
+          <button class="flex-1 py-2.5 rounded-lg bg-gray-800 text-white text-sm font-medium hover:bg-gray-700" onclick="Habib.copySummary(this)">کپی خلاصه</button>
           <button class="flex-1 py-2.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200" onclick="Habib.state.file=null;Habib.state.extractedText='';Habib.renderUpload()">فایل جدید</button>
         </div>
       </div>`;

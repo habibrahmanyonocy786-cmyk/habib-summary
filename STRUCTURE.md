@@ -1,15 +1,15 @@
 # Habib-summary - Project Structure
 
-> Last updated: 12 JUNE 2026 (2026-06-12 08:51)
+> Last updated: 12 June 2026 (2026-06-12 08:57)
 
 ```
 habib-summary/
 +-- _config.yml (0.2 KB)
 +-- data.json (12.7 KB)
-+-- index.html (3.4 KB)
++-- index.html (3.6 KB)
 +-- PLAN.md (10.8 KB)
 +-- README.md (0.8 KB)
-+-- STRUCTURE.md (2 KB)
++-- STRUCTURE.md (1.6 KB)
 +-- SUMMARY.md (2 KB)
 +-- update-project-files.ps1 (6.1 KB)
 +-- update-structure.ps1 (1 KB)
@@ -18,7 +18,7 @@ habib-summary/
     +-- manage.html (2.1 KB)
         +-- custom.css (2.5 KB)
         +-- .gitkeep (0 KB)
-        +-- app.js (27.5 KB)
+        +-- app.js (29.2 KB)
         +-- extract-text.js (1.3 KB)
         +-- ocr.js (0.8 KB)
         +-- summarizer.js (2.1 KB)
@@ -38,10 +38,10 @@ habib-summary/
 |------|-----------|-------------|
 | _config.yml | 0.2 | GitHub Pages config |
 | data.json | 12.7 | - |
-| index.html | 3.4 | Main SPA app |
+| index.html | 3.6 | Main SPA app |
 | PLAN.md | 10.8 | Database & backend plan |
 | README.md | 0.8 | Project README |
-| STRUCTURE.md | 2 | File structure doc |
+| STRUCTURE.md | 1.6 | File structure doc |
 | SUMMARY.md | 2 | Project summary |
 | update-project-files.ps1 | 6.1 | Combined structure + summary updater |
 | update-structure.ps1 | 1 | Legacy structure script |
@@ -50,7 +50,7 @@ habib-summary/
 | admin\manage.html | 2.1 | - |
 | assets\css\custom.css | 2.5 | - |
 | assets\fonts\.gitkeep | 0 | - |
-| assets\js\app.js | 27.5 | - |
+| assets\js\app.js | 29.2 | - |
 | assets\js\extract-text.js | 1.3 | - |
 | assets\js\ocr.js | 0.8 | - |
 | assets\js\summarizer.js | 2.1 | - |
