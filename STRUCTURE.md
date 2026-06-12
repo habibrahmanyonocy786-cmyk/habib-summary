@@ -1,15 +1,16 @@
 ﻿# Habib-summary - Project Structure
 
-> Last updated: 12 June 2026 (2026-06-12 09:19)
+> Last updated: 12 June 2026 (2026-06-12 09:28)
 
 ```
 habib-summary/
 +-- data.json (18.8 KB)
++-- DB-backend.md (45.5 KB)
 +-- index.html (3.6 KB)
 +-- PLAN.md (10.8 KB)
 +-- README.md (0.8 KB)
-+-- STRUCTURE.md (1.9 KB)
-+-- SUMMARY.md (2 KB)
++-- STRUCTURE.md (2.1 KB)
++-- SUMMARY.md (2.1 KB)
 +-- update-project-files.ps1 (6.3 KB)
 +-- update-structure.ps1 (1 KB)
 +-- _config.yml (0.2 KB)
@@ -37,11 +38,12 @@ habib-summary/
 | File | Size (KB) | Description |
 |------|-----------|-------------|
 | data.json | 18.8 | - |
+| DB-backend.md | 45.5 | - |
 | index.html | 3.6 | Main SPA app with 10 books & 30 articles |
 | PLAN.md | 10.8 | Database & backend plan |
 | README.md | 0.8 | Project README |
-| STRUCTURE.md | 1.9 | File structure doc |
-| SUMMARY.md | 2 | Project summary |
+| STRUCTURE.md | 2.1 | File structure doc |
+| SUMMARY.md | 2.1 | Project summary |
 | update-project-files.ps1 | 6.3 | Combined structure + summary updater |
 | update-structure.ps1 | 1 | Legacy structure script |
 | _config.yml | 0.2 | GitHub Pages config |
