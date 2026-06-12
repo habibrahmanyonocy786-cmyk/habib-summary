@@ -1,6 +1,6 @@
-# Habib-summary - Project Summary
+﻿# Habib-summary - Project Summary
 
-> Last updated: 12 June 2026 (2026-06-12 08:57)
+> Last updated: 12 June 2026 (2026-06-12 09:19)
 
 ## Overview
 
@@ -12,9 +12,10 @@ Currently deployed as a **Single-Page Application** on **GitHub Pages**.
 
 | Feature | Description |
 |---------|-------------|
-| **Book Summaries** | Browse summaries of 3 top books |
-| **Multiple Choice Q&A** | 3 questions per book + results |
-| **Mixed Quiz** | 5 random questions from all books |
+| **Book Summaries** | Browse summaries of 10 top books |
+| **Multiple Choice Q&A** | 5 questions per book (50 total) + results |
+| **Mixed Quiz** | 10 random questions from all 10 books |
+| **Economic Articles** | 30 curated economic articles with filters |
 | **Upload & Summarize** | Extract text and summarize from PDF, DOCX, JPEG/PNG |
 | **Responsive UI** | Mobile, tablet, desktop friendly |
 | **RTL Support** | Full Persian language design |

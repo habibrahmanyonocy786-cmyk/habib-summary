@@ -43,12 +43,13 @@ function Generate-StructureMd {
     $lines += "|------|-----------|-------------|"
 
     $descriptions = @{
-        "index.html" = "Main SPA app"
+        "index.html" = "Main SPA app with 10 books & 30 articles"
         "SUMMARY.md" = "Project summary"
         "STRUCTURE.md" = "File structure doc"
         "PLAN.md" = "Database & backend plan"
         "README.md" = "Project README"
         "_config.yml" = "GitHub Pages config"
+        "correction-plan.md" = "Code correction plan (16 issues)"
         "update-structure.ps1" = "Legacy structure script"
         "update-project-files.ps1" = "Combined structure + summary updater"
     }
@@ -90,9 +91,10 @@ function Generate-SummaryMd {
     $lines += ""
     $lines += "| Feature | Description |"
     $lines += "|---------|-------------|"
-    $lines += "| **Book Summaries** | Browse summaries of 3 top books |"
-    $lines += "| **Multiple Choice Q&A** | 3 questions per book + results |"
-    $lines += "| **Mixed Quiz** | 5 random questions from all books |"
+    $lines += "| **Book Summaries** | Browse summaries of 10 top books |"
+    $lines += "| **Multiple Choice Q&A** | 5 questions per book (50 total) + results |"
+    $lines += "| **Mixed Quiz** | 10 random questions from all 10 books |"
+    $lines += "| **Economic Articles** | 30 curated economic articles with filters |"
     $lines += "| **Upload & Summarize** | Extract text and summarize from PDF, DOCX, JPEG/PNG |"
     $lines += "| **Responsive UI** | Mobile, tablet, desktop friendly |"
     $lines += "| **RTL Support** | Full Persian language design |"

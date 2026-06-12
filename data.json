@@ -2,7 +2,7 @@
   "meta": {
     "source": "Google News RSS - Business Section",
     "updated": "2026-06-12",
-    "total_articles": 20,
+    "total_articles": 30,
     "language": "en",
     "description": "Economic articles fetched from Google News RSS feed. Database for Habib-summary project."
   },
@@ -226,6 +226,116 @@
       "category": "stock_market",
       "tags": ["SpaceX", "IPO", "employees", "millionaires", "wealth creation"],
       "sentiment": "positive"
+    },
+    {
+      "id": "eco-021",
+      "title": "Federal Reserve Holds Interest Rates Steady Amid Mixed Economic Signals",
+      "source": "Reuters",
+      "url": "https://www.reuters.com",
+      "published_at": "2026-06-10T18:00:00Z",
+      "summary": "The Federal Reserve kept interest rates unchanged at its June meeting, citing mixed signals on inflation and economic growth. The decision was widely expected by market participants.",
+      "category": "interest_rates",
+      "tags": ["Federal Reserve", "interest rates", "monetary policy", "inflation"],
+      "sentiment": "neutral"
+    },
+    {
+      "id": "eco-022",
+      "title": "Gold Prices Surge Past $3,000 as Investors Seek Safe Haven Amid Geopolitical Tensions",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com",
+      "published_at": "2026-06-10T14:30:00Z",
+      "summary": "Gold prices surged past the $3,000 per ounce mark for the first time as investors flocked to safe-haven assets amid escalating geopolitical tensions in the Middle East and trade uncertainties.",
+      "category": "commodities",
+      "tags": ["gold", "safe haven", "geopolitics", "commodities", "precious metals"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-023",
+      "title": "Global Semiconductor Shortage Eases as New Manufacturing Plants Come Online",
+      "source": "Financial Times",
+      "url": "https://www.ft.com",
+      "published_at": "2026-06-09T09:15:00Z",
+      "summary": "The global semiconductor shortage shows signs of easing as several new chip manufacturing facilities begin production. Analysts expect supply chain normalization by early 2027, boosting tech and auto industries.",
+      "category": "technology",
+      "tags": ["semiconductors", "supply chain", "manufacturing", "tech industry", "chips"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-024",
+      "title": "European Central Bank Raises Rates to 4.5% in Bid to Tame Stubborn Inflation",
+      "source": "AP News",
+      "url": "https://apnews.com",
+      "published_at": "2026-06-08T12:45:00Z",
+      "summary": "The European Central Bank raised its key interest rate to 4.5%, the highest level in over two decades, in a continued effort to bring inflation down to its 2% target. The move was met with mixed reactions from markets.",
+      "category": "interest_rates",
+      "tags": ["ECB", "interest rates", "eurozone", "inflation", "monetary policy"],
+      "sentiment": "negative"
+    },
+    {
+      "id": "eco-025",
+      "title": "Saudi Arabia and Russia Extend Oil Production Cuts Through Year End",
+      "source": "Reuters",
+      "url": "https://www.reuters.com",
+      "published_at": "2026-06-07T16:20:00Z",
+      "summary": "Saudi Arabia and Russia have agreed to extend their voluntary oil production cuts through the end of 2026, keeping global supply tight. Oil prices remained elevated following the announcement.",
+      "category": "commodities",
+      "tags": ["OPEC", "oil", "production cuts", "Saudi Arabia", "Russia"],
+      "sentiment": "neutral"
+    },
+    {
+      "id": "eco-026",
+      "title": "Japan's Economy Exceeds Expectations with 3.2% GDP Growth in Q1 2026",
+      "source": "Nikkei Asia",
+      "url": "https://asia.nikkei.com",
+      "published_at": "2026-06-06T07:00:00Z",
+      "summary": "Japan's economy grew at an annualized rate of 3.2% in the first quarter of 2026, surpassing analyst expectations. Strong consumer spending and a rebound in exports drove the better-than-expected performance.",
+      "category": "global_economy",
+      "tags": ["Japan", "GDP", "economic growth", "Asia", "consumer spending"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-027",
+      "title": "Amazon Announces $15 Billion Investment in Renewable Energy Projects Worldwide",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com",
+      "published_at": "2026-06-05T10:30:00Z",
+      "summary": "Amazon announced a $15 billion investment in renewable energy projects globally, including solar and wind farms. The initiative is part of the company's commitment to reach net-zero carbon emissions by 2040.",
+      "category": "technology",
+      "tags": ["Amazon", "renewable energy", "sustainability", "ESG", "investment"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-028",
+      "title": "US Housing Market Shows Signs of Recovery as Mortgage Applications Increase",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com",
+      "published_at": "2026-06-04T11:15:00Z",
+      "summary": "The US housing market is showing signs of recovery as mortgage applications rose for the third consecutive week. Lower interest rates and increased inventory are encouraging potential homebuyers to enter the market.",
+      "category": "interest_rates",
+      "tags": ["housing", "mortgage", "real estate", "recovery", "homebuyers"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-029",
+      "title": "Study Finds Universal Basic Income Trials Show Promising Results in Reducing Poverty",
+      "source": "The Guardian",
+      "url": "https://www.theguardian.com",
+      "published_at": "2026-06-03T08:45:00Z",
+      "summary": "A comprehensive study of Universal Basic Income trials across multiple countries found significant reductions in poverty and improvements in mental health. Critics, however, raise concerns about long-term funding and labor force participation.",
+      "category": "demographics",
+      "tags": ["UBI", "poverty", "social policy", "basic income", "research"],
+      "sentiment": "positive"
+    },
+    {
+      "id": "eco-030",
+      "title": "WTO Warns of Rising Protectionism as Global Trade Barriers Hit Decade High",
+      "source": "Reuters",
+      "url": "https://www.reuters.com",
+      "published_at": "2026-06-02T14:00:00Z",
+      "summary": "The World Trade Organization warned that global trade barriers have reached their highest level in a decade, threatening economic recovery. The rise in protectionist measures coincides with ongoing geopolitical tensions and trade disputes.",
+      "category": "global_economy",
+      "tags": ["WTO", "trade", "protectionism", "tariffs", "globalization"],
+      "sentiment": "negative"
     }
   ],
   "categories": [
@@ -237,7 +347,7 @@
     {
       "id": "global_economy",
       "name": "Global Economy",
-      "count": 4
+      "count": 6
     },
     {
       "id": "inflation",
@@ -247,22 +357,22 @@
     {
       "id": "commodities",
       "name": "Commodities",
-      "count": 1
+      "count": 3
     },
     {
       "id": "interest_rates",
       "name": "Interest Rates",
-      "count": 1
+      "count": 4
     },
     {
       "id": "technology",
       "name": "Technology & AI",
-      "count": 2
+      "count": 4
     },
     {
       "id": "demographics",
       "name": "Demographics",
-      "count": 1
+      "count": 2
     },
     {
       "id": "healthcare",
