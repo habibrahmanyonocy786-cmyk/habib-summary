@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habib-summary - خلاصه کتاب‌ها</title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+    * {
+      font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+      min-height: 100vh;
+    }
+    .brand-gradient {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #1e3a5f 100%);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+    }
+    .tab-btn {
+      transition: all 0.3s ease;
+      position: relative;
+      border-radius: 12px 12px 0 0;
+    }
+    .tab-btn.active {
+      background: white;
+      color: #1e3a5f;
+      font-weight: 700;
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 20%;
+      width: 60%;
+      height: 3px;
+      background: #1e3a5f;
+      border-radius: 3px 3px 0 0;
+    }
+    .view {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .view.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .option-btn {
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+    .option-btn:hover:not(.disabled) {
+      border-color: #2d5a8e;
+      background: #eef4ff;
+    }
+    .option-btn.selected {
+      border-color: #1e3a5f;
+      background: #dbeafe;
+    }
+    .option-btn.correct {
+      border-color: #059669;
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .option-btn.wrong {
+      border-color: #dc2626;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .option-btn.disabled {
+      cursor: default;
+      opacity: 0.8;
+    }
+    .score-card {
+      background: linear-gradient(135deg, #1e3a5f, #2d5a8e);
+    }
+    .book-cover {
+      width: 64px;
+      height: 80px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2d5a8e, #4a8bc2);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    .bounce-in {
+      animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    @media (max-width: 640px) {
+      .tab-btn {
+        font-size: 0.78rem;
+        padding: 10px 8px;
+      }
+      .container {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2d5a8e;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <div id="confettiContainer" class="confetti-container"></div>
+
+  <header class="brand-gradient text-white shadow-lg">
+    <div class="max-w-5xl mx-auto px-4 py-5 sm:py-6">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl font-bold backdrop-blur-sm">H</div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Habib-summary</h1>
+            <p class="text-white/70 text-xs sm:text-sm -mt-0.5">مرجع خلاصه کتاب و آزمون</p>
+          </div>
+        </div>
+        <div class="text-xs sm:text-sm text-white/60 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-sm">
+          <span>ساخته شده توسط </span>
+          <span class="text-white/90 font-semibold">Habib Rahman Yonocy</span>
+          <span class="mx-1.5">|</span>
+          <span dir="ltr" class="text-white/80">0784258414</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-gray-200/60">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex gap-1 sm:gap-2 overflow-x-auto pt-2">
+        <button class="tab-btn active px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium text-gray-500 whitespace-nowrap" data-tab="summaries">
+          📚 خلاصه کتاب‌ها
+        </button>
+        <button class="tab-btn px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium text-gray-500 whitespace-nowrap" data-tab="questions">
+          ❓ سوالات هر کتاب
+        </button>
+        <button class="tab-btn px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium text-gray-500 whitespace-nowrap" data-tab="mixed">
+          🧪 آزمون ترکیبی
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ===== TAB 1: SUMMARIES ===== -->
+    <section id="view-summaries" class="view active">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">خلاصه کتاب‌های برتر</h2>
+        <p class="text-gray-500 mt-1.5 text-sm sm:text-base">برای مشاهده خلاصه روی هر کتاب کلیک کنید</p>
+      </div>
+      <div id="booksContainer" class="grid md:grid-cols-3 gap-5 sm:gap-6"></div>
+      <div id="summaryPanel" class="hidden mt-8"></div>
+    </section>
+
+    <!-- ===== TAB 2: QUESTIONS ===== -->
+    <section id="view-questions" class="view">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">سوالات هر کتاب</h2>
+        <p class="text-gray-500 mt-1.5 text-sm sm:text-base">کتاب مورد نظر را انتخاب کنید و به سوالات پاسخ دهید</p>
+      </div>
+      <div id="questionBookSelect" class="flex flex-wrap gap-3 justify-center mb-8"></div>
+      <div id="questionArea" class="max-w-2xl mx-auto"></div>
+    </section>
+
+    <!-- ===== TAB 3: MIXED TEST ===== -->
+    <section id="view-mixed" class="view">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">آزمون ترکیبی</h2>
+        <p class="text-gray-500 mt-1.5 text-sm sm:text-base">۵ سوال تصادفی از تمام کتاب‌ها</p>
+      </div>
+      <div id="mixedArea" class="max-w-2xl mx-auto"></div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white/60 backdrop-blur-sm border-t border-gray-200/60 mt-10 py-6 text-center text-gray-500 text-sm">
+    <p>Habib-summary &copy; 2026 | ساخته شده توسط Habib Rahman Yonocy | تماس: 0784258414</p>
+  </footer>
+
+  <script>
+    // ============================================================
+    // DATA
+    // ============================================================
+    const BOOKS = [{
+      id: 'atomic',
+      title: 'کتاب عادات اتمی (Atomic Habits)',
+      author: 'جیمز کلیر (James Clear)',
+      emoji: '⚛️',
+      color: 'from-blue-500 to-indigo-600',
+      summary: 'کتاب عادات اتمی اثر جیمز کلیر بر این اصل استوار است که تغییرات کوچک و تدریجی (یک درصد بهتر هر روز) به نتایج بزرگ و پایدار منجر می‌شوند. کلیر چهار قانون تغییر رفتار را معرفی می‌کند: آشکارسازی (make it obvious)، جذاب‌سازی (make it attractive)، آسان‌سازی (make it easy)، و رضایت‌بخشی (make it satisfying). او تأکید می‌کند که به جای تمرکز بر اهداف، باید بر سیستم‌ها و هویت خود تمرکز کنید؛ یعنی عادت‌ها نه چیزی که دارید، بلکه کسی هستید که می‌شوید. این کتاب با مثال‌های عملی نشان می‌دهد که عادت‌های اتمی، اگرچه کوچک به نظر می‌رسند، اما مانند سود مرکب در طول زمان زندگی شما را دگرگون می‌کنند.',
+      questions: [{
+        q: 'بر اساس کتاب عادات اتمی، قانون اول تغییر رفتار چیست؟',
+        options: ['آشکارسازی (Make it Obvious)', 'جذاب‌سازی (Make it Attractive)', 'آسان‌سازی (Make it Easy)',
+          'رضایت‌بخشی (Make it Satisfying)'
+        ],
+        correct: 0
+      }, {
+        q: 'جیمز کلیر به جای تمرکز بر اهداف، بر چه چیزی تأکید می‌کند؟',
+        options: ['نتیجه نهایی', 'سیستم‌ها و هویت', 'تلاش بیشتر', 'انضباط شخصی'],
+        correct: 1
+      }, {
+        q: 'مفهوم "عادت اتمی" به چه معناست؟',
+        options: ['عادت‌های بسیار سخت', 'تغییرات کوچک که در طول زمان نتایج بزرگ ایجاد می‌کنند',
+          'عادت‌هایی که به انرژی اتمی نیاز دارند', 'ترک عادت‌های بد در یک روز'
+        ],
+        correct: 1
+      }]
+    }, {
+      id: 'richdad',
+      title: 'کتاب پدر پولدار پدر بی‌پول (Rich Dad Poor Dad)',
+      author: 'رابرت کیوساکی (Robert Kiyosaki)',
+      emoji: '💰',
+      color: 'from-amber-500 to-yellow-600',
+      summary: 'رابرت کیوساکی در این کتاب دو دیدگاه متضاد نسبت به پول را روایت می‌کند: دیدگاه "پدر بی‌پول" (پدر واقعی او که تحصیلکرده اما از نظر مالی ورشکست بود) و "پدر پولدار" (پدر دوستش که ثروتمند بود). اصل کلیدی کتاب این است که افراد ثروتمند به جای کار کردن برای پول، پول را برای خود کار می‌گذارند. کیوساکی تأکید می‌کند که دارایی‌ها (asset) چیزهایی هستند که پول به جیب شما می‌آورند، در حالی که بدهی‌ها (liability) پول از جیب شما خارج می‌کنند. او بر اهمیت سواد مالی، سرمایه‌گذاری، و یادگیری مستمر تأکید دارد و معتقد است مدرسه به ما سواد مالی نمی‌آموزد.',
+      questions: [{
+        q: 'به گفته کیوساکی، "دارایی" (Asset) چیست؟',
+        options: ['چیزی که ارزش آن افزایش می‌یابد', 'چیزی که پول به جیب شما می‌آورد',
+          'چیزی که می‌توانید بفروشید', 'خانه شخصی شما'
+        ],
+        correct: 1
+      }, {
+        q: 'مفهوم "مسابقه موش‌ها" (Rat Race) در کتاب چیست؟',
+        options: ['رقابت برای کسب مقام بهتر در کار', 'چرخه بی‌پایان کار کردن برای پرداخت قبوض و هزینه‌ها',
+          'مسابقه برای ثروتمند شدن', 'رقابت بین پدر پولدار و پدر بی‌پول'
+        ],
+        correct: 1
+      }, {
+        q: 'به نظر کیوساکی، افراد ثروتمند چه کاری انجام می‌دهند؟',
+        options: ['پس‌انداز می‌کنند', 'پول را برای خود کار می‌گذارند', 'سخت‌تر از دیگران کار می‌کنند',
+          'مدرک تحصیلی بالاتری می‌گیرند'
+        ],
+        correct: 1
+      }]
+    }, {
+      id: 'habits7',
+      title: 'کتاب هفت عادت مردم مؤثر (7 Habits)',
+      author: 'استیون کاوی (Stephen Covey)',
+      emoji: '🌟',
+      color: 'from-emerald-500 to-teal-600',
+      summary: 'استیون کاوی در این کتاب هفت عادت را معرفی می‌کند که افراد مؤثر برای موفقیت شخصی و حرفه‌ای به کار می‌گیرند. سه عادت اول (پیش‌فعالی، هدف‌گرایی در پایان، اولویت‌بندی) مربوط به پیروزی شخصی یا استقلال فردی هستند. سه عادت بعدی (برنده-برنده اندیشی، اول گوش دادن بعد صحبت کردن، هم‌افزایی) به پیروزی جمعی یا وابستگی متقابل مربوط می‌شوند. عادت هفتم (تیز کردن اره) به بهبود و تجدید قوای مداوم در چهار بعد جسمی، ذهنی، اجتماعی و روحانی اشاره دارد. کاوی معتقد است اثربخشی واقعی از هم‌سو کردن اصول و شخصیت حاصل می‌شود و این عادت‌ها باید از درون به بیرون شکل بگیرند.',
+      questions: [{
+        q: 'عادت "پیش‌فعالی" (Proactivity) یعنی چه؟',
+        options: ['سریع عمل کردن', 'مسئولیت‌پذیری در قبال انتخاب‌ها و واکنش‌ها', 'فعالیت بدنی منظم',
+          'پیش‌بینی آینده'
+        ],
+        correct: 1
+      }, {
+        q: 'عادت "با هدف نهایی شروع کن" (Begin with the End in Mind) بر چه اساسی است؟',
+        options: ['تعیین اهداف سالانه', 'داشتن چشم‌انداز و مأموریت شخصی', 'پایان دادن به کارها',
+          'برنامه‌ریزی روزانه'
+        ],
+        correct: 1
+      }, {
+        q: 'منظور از "هم‌افزایی" (Synergize) در کتاب چیست؟',
+        options: ['کار گروهی ساده', 'ترکیب نقاط قوت افراد برای ایجاد نتیجه‌ای بهتر از مجموع فردی',
+          'رقابت سازنده', 'تقسیم کار بین اعضای تیم'
+        ],
+        correct: 1
+      }]
+    }];
+
+    // ============================================================
+    // STATE
+    // ============================================================
+    const state = {
+      currentTab: 'summaries',
+      // book questions
+      activeBookId: null,
+      qIndex: 0,
+      qAnswers: {},
+      qFinished: false,
+      // mixed test
+      mixedQuestions: [],
+      mixedIndex: 0,
+      mixedAnswers: {},
+      mixedFinished: false,
+      mixedStarted: false
+    };
+
+    // ============================================================
+    // DOM REFS
+    // ============================================================
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+
+    const views = {
+      summaries: $('#view-summaries'),
+      questions: $('#view-questions'),
+      mixed: $('#view-mixed')
+    };
+    const tabBtns = $$('.tab-btn');
+    const booksContainer = $('#booksContainer');
+    const summaryPanel = $('#summaryPanel');
+    const questionBookSelect = $('#questionBookSelect');
+    const questionArea = $('#questionArea');
+    const mixedArea = $('#mixedArea');
+
+    // ============================================================
+    // TAB SWITCHING
+    // ============================================================
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        Object.keys(views).forEach(key => views[key].classList.remove('active'));
+        views[tab].classList.add('active');
+        state.currentTab = tab;
+      });
+    });
+
+    // ============================================================
+    // TAB 1: SUMMARIES
+    // ============================================================
+    function renderBooks() {
+      booksContainer.innerHTML = '';
+      BOOKS.forEach((book, idx) => {
+        const card = document.createElement('div');
+        card.className =
+          'bg-white rounded-2xl shadow-md card-hover overflow-hidden cursor-pointer border border-gray-100';
+        card.innerHTML = `
+            <div class="h-2 bg-gradient-to-r ${book.color}"></div>
+            <div class="p-5 sm:p-6">
+              <div class="flex items-start gap-4">
+                <div class="book-cover bg-gradient-to-br ${book.color} text-white shadow-md text-2xl">
+                  ${book.emoji}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-base sm:text-lg text-gray-800 leading-tight">${book.title}</h3>
+                  <p class="text-gray-500 text-xs sm:text-sm mt-0.5">${book.author}</p>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm mt-4 line-clamp-3 leading-relaxed">${book.summary.substring(0, 120)}...</p>
+              <div class="mt-4 text-${book.color.includes('blue') ? 'blue' : book.color.includes('amber') ? 'amber' : 'emerald'}-600 text-sm font-medium flex items-center gap-1.5">
+                <span>خواندن خلاصه کامل</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </div>
+            </div>
+          `;
+        card.addEventListener('click', () => showSummary(book));
+        booksContainer.appendChild(card);
+      });
+    }
+
+    function showSummary(book) {
+      summaryPanel.classList.remove('hidden');
+      summaryPanel.innerHTML = `
+          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden bounce-in">
+            <div class="h-2 bg-gradient-to-r ${book.color}"></div>
+            <div class="p-6 sm:p-8">
+              <button id="closeSummary" class="float-left text-gray-400 hover:text-gray-600 transition-colors p-1">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-20 rounded-xl bg-gradient-to-br ${book.color} text-white flex items-center justify-center text-3xl shadow-md">
+                  ${book.emoji}
+                </div>
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-bold text-gray-800">${book.title}</h3>
+                  <p class="text-gray-500 text-sm mt-0.5">${book.author}</p>
+                </div>
+              </div>
+              <div class="prose prose-sm sm:prose-base max-w-none">
+                <p class="text-gray-700 leading-8 text-justify text-base sm:text-lg">${book.summary}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      summaryPanel.querySelector('#closeSummary').addEventListener('click', () => {
+        summaryPanel.classList.add('hidden');
+      });
+      summaryPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ============================================================
+    // TAB 2: QUESTIONS PER BOOK
+    // ============================================================
+    function renderQuestionBookSelect() {
+      questionBookSelect.innerHTML = '';
+      BOOKS.forEach(book => {
+        const btn = document.createElement('button');
+        btn.className =
+          `px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 border-2 ${state.activeBookId === book.id ? 'bg-gray-800 text-white border-gray-800 shadow-md' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400'}`;
+        btn.textContent = `${book.emoji} ${book.title}`;
+        btn.addEventListener('click', () => startBookQuestions(book.id));
+        questionBookSelect.appendChild(btn);
+      });
+    }
+
+    function startBookQuestions(bookId) {
+      state.activeBookId = bookId;
+      state.qIndex = 0;
+      state.qAnswers = {};
+      state.qFinished = false;
+      renderQuestionBookSelect();
+      renderQuestionView();
+    }
+
+    function getActiveBook() {
+      return BOOKS.find(b => b.id === state.activeBookId);
+    }
+
+    function renderQuestionView() {
+      const book = getActiveBook();
+      if (!book) {
+        questionArea.innerHTML = `
+            <div class="text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <div class="text-5xl mb-4">📖</div>
+              <p class="text-gray-500 text-lg">لطفاً یک کتاب را از بالا انتخاب کنید</p>
+            </div>
+          `;
+        return;
+      }
+      if (state.qFinished) {
+        renderQuestionResult(book);
+        return;
+      }
+      const q = book.questions[state.qIndex];
+      const total = book.questions.length;
+      const progress = ((state.qIndex) / total) * 100;
+      const selected = state.qAnswers[state.qIndex];
+      questionArea.innerHTML = `
+          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div class="h-2 bg-gradient-to-r ${book.color}"></div>
+            <div class="p-6 sm:p-8">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-sm font-medium text-gray-500">${book.emoji} ${book.title}</span>
+                <span class="text-sm font-bold text-gray-700">${state.qIndex + 1} / ${total}</span>
+              </div>
+              <div class="progress-bar mb-6">
+                <div class="fill" style="width:${progress}%"></div>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-6 leading-relaxed">${q.q}</h3>
+              <div id="optionsList" class="space-y-3"></div>
+              <div class="flex items-center justify-between mt-8 pt-5 border-t border-gray-100">
+                <button id="prevQBtn" class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors ${state.qIndex === 0 ? 'opacity-0 pointer-events-none' : ''}">
+                  قبلی
+                </button>
+                <span class="text-xs text-gray-400">
+                  ${state.qIndex + 1 === total ? 'آخرین سوال' : 'سوال ' + (state.qIndex + 1)}
+                </span>
+                <button id="nextQBtn" class="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-colors ${selected !== undefined ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-300 cursor-not-allowed'}" ${selected === undefined ? 'disabled' : ''}>
+                  ${state.qIndex + 1 === total ? 'پایان' : 'بعدی'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+      const optionsList = questionArea.querySelector('#optionsList');
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        const isSelected = selected === i;
+        btn.className =
+          `option-btn w-full text-right px-5 py-3.5 rounded-xl text-sm sm:text-base bg-gray-50 hover:bg-gray-100 border-2 ${isSelected ? 'selected border-gray-800 bg-gray-50' : 'border-transparent'}`;
+        btn.innerHTML = `<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gray-200 text-xs font-bold ml-3 ${isSelected ? 'bg-gray-800 text-white' : ''}">${String.fromCharCode(65 + i)}</span> ${opt}`;
+        btn.addEventListener('click', () => selectOption(i));
+        optionsList.appendChild(btn);
+      });
+
+      const nextBtn = questionArea.querySelector('#nextQBtn');
+      nextBtn.addEventListener('click', () => {
+        if (selected === undefined) return;
+        if (state.qIndex + 1 === total) {
+          state.qFinished = true;
+          renderQuestionView();
+        } else {
+          state.qIndex++;
+          renderQuestionView();
+        }
+      });
+
+      const prevBtn = questionArea.querySelector('#prevQBtn');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (state.qIndex > 0) {
+            state.qIndex--;
+            renderQuestionView();
+          }
+        });
+      }
+    }
+
+    function selectOption(idx) {
+      if (state.qFinished) return;
+      state.qAnswers[state.qIndex] = idx;
+      renderQuestionView();
+    }
+
+    function renderQuestionResult(book) {
+      const total = book.questions.length;
+      let correctCount = 0;
+      let resultHTML = '';
+      book.questions.forEach((q, i) => {
+        const userAns = state.qAnswers[i];
+        const isCorrect = userAns === q.correct;
+        if (isCorrect) correctCount++;
+        const userLabel = userAns !== undefined ? q.options[userAns] : 'پاسخی داده نشده';
+        resultHTML += `
+            <div class="p-4 ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'} rounded-xl border">
+              <p class="font-medium text-sm sm:text-base text-gray-800 mb-2">${i + 1}. ${q.q}</p>
+              <div class="text-sm space-y-1">
+                <p class="${isCorrect ? 'text-emerald-700' : 'text-red-600'}">
+                  <span class="font-medium">پاسخ شما:</span> ${userLabel}
+                </p>
+                ${!isCorrect ? `<p class="text-emerald-700"><span class="font-medium">پاسخ صحیح:</span> ${q.options[q.correct]}</p>` : ''}
+              </div>
+            </div>
+          `;
+      });
+
+      const scorePercent = (correctCount / total) * 100;
+      let msg = '';
+      let emoji = '';
+      if (scorePercent === 100) { emoji = '🏆';
+        msg = 'عالی! پاسخ‌های شما همگی درست بود!'; } else if (scorePercent >= 66) { emoji = '🌟';
+        msg = 'خوب! تسلط خوبی بر این کتاب دارید.'; } else if (scorePercent >= 33) { emoji = '📖';
+        msg = 'قابل قبول! کمی بیشتر مطالعه کنید.'; } else { emoji = '💪';
+        msg = 'نیاز به تمرین بیشتر دارید. دوباره تلاش کنید!'; }
+
+      questionArea.innerHTML = `
+          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden bounce-in">
+            <div class="score-card p-6 sm:p-8 text-white text-center">
+              <div class="text-5xl mb-3">${emoji}</div>
+              <h3 class="text-2xl sm:text-3xl font-bold">${correctCount} از ${total}</h3>
+              <p class="text-white/80 mt-2">${msg}</p>
+              <div class="mt-4 flex items-center justify-center gap-2">
+                <div class="progress-bar flex-1 max-w-xs bg-white/20">
+                  <div class="fill bg-white" style="width:${scorePercent}%"></div>
+                </div>
+                <span class="text-sm font-bold text-white/90">${Math.round(scorePercent)}%</span>
+              </div>
+            </div>
+            <div class="p-6 sm:p-8">
+              <h4 class="font-bold text-gray-800 mb-4 text-lg">📋 نتایج تفکیکی</h4>
+              <div class="space-y-3">${resultHTML}</div>
+              <div class="flex flex-col sm:flex-row gap-3 mt-8 pt-5 border-t border-gray-100">
+                <button id="retryBookBtn" class="flex-1 px-5 py-3 rounded-xl bg-gray-800 text-white font-medium hover:bg-gray-700 transition-colors text-sm">
+                  شروع مجدد آزمون این کتاب
+                </button>
+                <button id="backToBookSelectBtn" class="flex-1 px-5 py-3 rounded-xl bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-colors text-sm">
+                  انتخاب کتاب دیگر
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      if (scorePercent === 100) launchConfetti();
+      questionArea.querySelector('#retryBookBtn').addEventListener('click', () => startBookQuestions(book.id));
+      questionArea.querySelector('#backToBookSelectBtn').addEventListener('click', () => {
+        state.activeBookId = null;
+        state.qIndex = 0;
+        state.qAnswers = {};
+        state.qFinished = false;
+        renderQuestionBookSelect();
+        renderQuestionView();
+      });
+    }
+
+    // ============================================================
+    // TAB 3: MIXED TEST
+    // ============================================================
+    function startMixedTest() {
+      const allQuestions = [];
+      BOOKS.forEach(book => {
+        book.questions.forEach(q => {
+          allQuestions.push({ ...q, bookTitle: book.title, bookEmoji: book.emoji, bookColor: book.color });
+        });
+      });
+      // shuffle
+      const shuffled = [...allQuestions];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      state.mixedQuestions = shuffled.slice(0, 5);
+      state.mixedIndex = 0;
+      state.mixedAnswers = {};
+      state.mixedFinished = false;
+      state.mixedStarted = true;
+      renderMixedView();
+    }
+
+    function renderMixedView() {
+      if (!state.mixedStarted) {
+        mixedArea.innerHTML = `
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden text-center py-16 sm:py-20 px-6">
+              <div class="text-6xl mb-5">🧪</div>
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">آزمون ترکیبی</h3>
+              <p class="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
+                ۵ سوال تصادفی از تمام کتاب‌ها برای شما انتخاب می‌شود. آماده‌اید؟
+              </p>
+              <button id="startMixedBtn" class="px-8 py-3.5 rounded-xl bg-gray-800 text-white font-bold text-base hover:bg-gray-700 transition-colors shadow-lg shadow-gray-800/20">
+                شروع آزمون ترکیبی
+              </button>
+            </div>
+          `;
+        mixedArea.querySelector('#startMixedBtn').addEventListener('click', startMixedTest);
+        return;
+      }
+
+      if (state.mixedFinished) {
+        renderMixedResult();
+        return;
+      }
+
+      const q = state.mixedQuestions[state.mixedIndex];
+      const total = state.mixedQuestions.length;
+      const progress = (state.mixedIndex / total) * 100;
+      const selected = state.mixedAnswers[state.mixedIndex];
+
+      mixedArea.innerHTML = `
+          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div class="h-2 bg-gradient-to-r from-gray-600 to-gray-800"></div>
+            <div class="p-6 sm:p-8">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-sm font-medium text-gray-500">${q.bookEmoji} ${q.bookTitle}</span>
+                <span class="text-sm font-bold text-gray-700">${state.mixedIndex + 1} / ${total}</span>
+              </div>
+              <div class="progress-bar mb-6">
+                <div class="fill" style="width:${progress}%"></div>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-6 leading-relaxed">${q.q}</h3>
+              <div id="mixedOptionsList" class="space-y-3"></div>
+              <div class="flex items-center justify-between mt-8 pt-5 border-t border-gray-100">
+                <button id="prevMixedBtn" class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors ${state.mixedIndex === 0 ? 'opacity-0 pointer-events-none' : ''}">
+                  قبلی
+                </button>
+                <span class="text-xs text-gray-400">${state.mixedIndex + 1 === total ? 'آخرین سوال' : 'سوال ' + (state.mixedIndex + 1)}</span>
+                <button id="nextMixedBtn" class="px-5 py-2.5 rounded-xl text-sm font-medium transition-colors ${selected !== undefined ? (state.mixedIndex + 1 === total ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-gray-800 hover:bg-gray-700 text-white') : 'bg-gray-300 cursor-not-allowed text-gray-500'}" ${selected === undefined ? 'disabled' : ''}>
+                  ${state.mixedIndex + 1 === total ? 'پایان آزمون' : 'بعدی'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+      const optionsList = mixedArea.querySelector('#mixedOptionsList');
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        const isSelected = selected === i;
+        btn.className =
+          `option-btn w-full text-right px-5 py-3.5 rounded-xl text-sm sm:text-base bg-gray-50 hover:bg-gray-100 border-2 ${isSelected ? 'selected border-gray-800 bg-gray-50' : 'border-transparent'}`;
+        btn.innerHTML = `<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gray-200 text-xs font-bold ml-3 ${isSelected ? 'bg-gray-800 text-white' : ''}">${String.fromCharCode(65 + i)}</span> ${opt}`;
+        btn.addEventListener('click', () => selectMixedOption(i));
+        optionsList.appendChild(btn);
+      });
+
+      const nextBtn = mixedArea.querySelector('#nextMixedBtn');
+      nextBtn.addEventListener('click', () => {
+        if (selected === undefined) return;
+        if (state.mixedIndex + 1 === total) {
+          state.mixedFinished = true;
+          renderMixedView();
+        } else {
+          state.mixedIndex++;
+          renderMixedView();
+        }
+      });
+
+      const prevBtn = mixedArea.querySelector('#prevMixedBtn');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (state.mixedIndex > 0) {
+            state.mixedIndex--;
+            renderMixedView();
+          }
+        });
+      }
+    }
+
+    function selectMixedOption(idx) {
+      if (state.mixedFinished) return;
+      state.mixedAnswers[state.mixedIndex] = idx;
+      renderMixedView();
+    }
+
+    function renderMixedResult() {
+      const total = state.mixedQuestions.length;
+      let correctCount = 0;
+      let resultHTML = '';
+      state.mixedQuestions.forEach((q, i) => {
+        const userAns = state.mixedAnswers[i];
+        const isCorrect = userAns === q.correct;
+        if (isCorrect) correctCount++;
+        const userLabel = userAns !== undefined ? q.options[userAns] : 'پاسخی داده نشده';
+        resultHTML += `
+            <div class="p-4 ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'} rounded-xl border">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-xs">${q.bookEmoji}</span>
+                <span class="text-xs text-gray-500">${q.bookTitle}</span>
+              </div>
+              <p class="font-medium text-sm sm:text-base text-gray-800 mb-2">${i + 1}. ${q.q}</p>
+              <div class="text-sm space-y-1">
+                <p class="${isCorrect ? 'text-emerald-700' : 'text-red-600'}">
+                  <span class="font-medium">پاسخ شما:</span> ${userLabel}
+                </p>
+                ${!isCorrect ? `<p class="text-emerald-700"><span class="font-medium">پاسخ صحیح:</span> ${q.options[q.correct]}</p>` : ''}
+              </div>
+            </div>
+          `;
+      });
+
+      const scorePercent = (correctCount / total) * 100;
+      let msg = '';
+      let emoji = '';
+      if (scorePercent === 100) { emoji = '🏆';
+        msg = 'تبریک! شما به تمام سوالات پاسخ صحیح دادید!'; } else if (scorePercent >= 60) { emoji = '🌟';
+        msg = 'خوب بود! تسلط خوبی روی مطالب دارید.'; } else if (scorePercent >= 40) { emoji = '📖';
+        msg = 'قابل قبول! کمی بیشتر روی کتاب‌ها تمرکز کنید.'; } else { emoji = '💪';
+        msg = 'نیاز به مطالعه بیشتری دارید. دوباره تلاش کنید!'; }
+
+      mixedArea.innerHTML = `
+          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden bounce-in">
+            <div class="score-card p-6 sm:p-8 text-white text-center">
+              <div class="text-5xl mb-3">${emoji}</div>
+              <h3 class="text-2xl sm:text-3xl font-bold">${correctCount} از ${total}</h3>
+              <p class="text-white/80 mt-2 text-lg">${emoji} ${msg}</p>
+              <div class="mt-4 flex items-center justify-center gap-2">
+                <div class="progress-bar flex-1 max-w-xs bg-white/20">
+                  <div class="fill bg-white" style="width:${scorePercent}%"></div>
+                </div>
+                <span class="text-sm font-bold text-white/90">${Math.round(scorePercent)}%</span>
+              </div>
+            </div>
+            <div class="p-6 sm:p-8">
+              <h4 class="font-bold text-gray-800 mb-4 text-lg">📋 نتایج تفکیکی</h4>
+              <div class="space-y-3">${resultHTML}</div>
+              <div class="flex flex-col sm:flex-row gap-3 mt-8 pt-5 border-t border-gray-100">
+                <button id="retryMixedBtn" class="flex-1 px-5 py-3 rounded-xl bg-gray-800 text-white font-medium hover:bg-gray-700 transition-colors text-sm">
+                  شروع مجدد آزمون ترکیبی
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      if (scorePercent === 100) launchConfetti();
+      mixedArea.querySelector('#retryMixedBtn').addEventListener('click', () => {
+        state.mixedStarted = false;
+        state.mixedFinished = false;
+        state.mixedQuestions = [];
+        state.mixedIndex = 0;
+        state.mixedAnswers = {};
+        renderMixedView();
+      });
+    }
+
+    // ============================================================
+    // CONFETTI
+    // ============================================================
+    function launchConfetti() {
+      const container = document.getElementById('confettiContainer');
+      container.innerHTML = '';
+      const colors = ['#1e3a5f', '#2d5a8e', '#4a8bc2', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6', '#ec4899'];
+      const shapes = ['circle', 'square'];
+      for (let i = 0; i < 80; i++) {
+        const el = document.createElement('div');
+        el.className = 'confetti';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = 6 + Math.random() * 8;
+        const left = Math.random() * 100;
+        const dur = 2 + Math.random() * 3;
+        const delay = Math.random() * 2;
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        el.style.cssText = `
+            left: ${left}%;
+            width: ${size}px;
+            height: ${size}px;
+            background: ${color};
+            border-radius: ${shape === 'circle' ? '50%' : '2px'};
+            animation-duration: ${dur}s;
+            animation-delay: ${delay}s;
+          `;
+        container.appendChild(el);
+      }
+      setTimeout(() => { container.innerHTML = ''; }, 5000);
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    renderBooks();
+    renderQuestionBookSelect();
+    renderQuestionView();
+    renderMixedView();
+  </script>
+
+</body>
+</html>

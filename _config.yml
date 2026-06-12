@@ -1,0 +1,7 @@
+# Habib-summary - GitHub Pages config
+# Disable Jekyll processing - this is a pure static HTML/CSS/JS site
+plugins: []
+exclude:
+  - README.md
+  - package.json
+  - node_modules
